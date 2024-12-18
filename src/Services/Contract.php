@@ -34,12 +34,12 @@ class Contract extends Service
 
     }
 
-    public function update(ObjectId | uniqid $id, array $data): array
+    public function update(ObjectId | string $id, array $data): array
     {
 
     }
 
-    public function delete(ObjectId | uniqid $id): array
+    public function delete(ObjectId | string $id): array
     {
 
     }

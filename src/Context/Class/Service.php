@@ -25,9 +25,9 @@ abstract class Service {
 
     abstract public function create(array $data): array;
 
-    abstract public function update(ObjectId | uniqid $id, array $data): array;
+    abstract public function update(ObjectId | string $id, array $data): array;
 
-    abstract public function delete(ObjectId | uniqid $id): array;
+    abstract public function delete(ObjectId | string $id): array;
 
     private function retrieveRepository(Repositories $repository, array $authOptions): Repositories
     {
