@@ -9,7 +9,7 @@ use DBConnector\Context\Interface\MySQLAdapterInterface;
 class MySQLAdapter implements MySQLAdapterInterface
 {
     private PDO $MySQLConnection;
-    private static MySQLAdapter $adapterInstance;
+    private static MySQLAdapter|null $adapterInstance = null;
 
     public function retrieveConnection(string $host, string $port, string $db, string $username, string $password): PDO | Exception
     {
@@ -17,8 +17,8 @@ class MySQLAdapter implements MySQLAdapterInterface
             if(isset($this->MySQLConnection)) {
                 return $this->MySQLConnection;
             }
-
-            return $this->MySQLConnection = new PDO("mysql:host=$host:$port;dbname=$db", $username, $password);
+            
+            return $this->MySQLConnection = new PDO("mysql:host=$host;port=$port;dbname=$db;charset=utf8", $username, $password);
         } catch (Exception $e) {
             return new Exception("MySQL connection error: " . $e->getMessage());
         }

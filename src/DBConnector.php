@@ -1,6 +1,7 @@
 <?php
 namespace DBConnector;
 
+use DBConnector\Context\Types\Services;
 use DBConnector\MongoDB\MongoDBContext;
 use DBConnector\MySQL\MySQLContext;
 use DBConnector\Context\Types\Adapters;
@@ -19,7 +20,7 @@ class DBConnector
                 return new MySQLContext($authOptions);
 
             case Adapters::MongoDB:
-                if (!isset($authOptions['uri'])) {
+                if (!isset($authOptions['uri'], $authOptions['database'])) {
                     throw new InvalidArgumentException('Missing authentication options for MongoDB adapter');
                 }
                 return new MongoDBContext($authOptions);
@@ -29,3 +30,5 @@ class DBConnector
         }
     }
 }
+
+DBConnector::useAdapter(Adapters::MongoDB, $authOptions)->retrieveService(Services::ContractService);

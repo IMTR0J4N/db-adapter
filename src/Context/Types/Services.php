@@ -8,4 +8,5 @@ enum Services: string
     case BillingService = 'billing';
     case CustomerService = 'customer';
     case VehicleService = 'vehicle';
+    case UNKNOWN_TEST = '';
 }

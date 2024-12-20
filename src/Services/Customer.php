@@ -5,31 +5,31 @@ namespace DBConnector\Services;
 use DBConnector\Context\Class\Service;
 use DBConnector\Context\Types\Adapters;
 use DBConnector\Context\Types\Repositories;
-use DBConnector\MySQL\Entity\Contract as MySQLContract;
-use DBConnector\MongoDB\Document\Contract as MongoDBContract;
+use DBConnector\MySQL\Entity\Customer as MySQLCustomer;
+use DBConnector\MongoDB\Document\Customer as MongoDBCustomer;
 use MongoDB\BSON\ObjectId;
 use Exception;
 
 /**
- * Classe ContractService
+ * Classe CustomerService
  *
- * Fournit des services pour gérer les opérations de facturation (Contract) en utilisant les repositories MySQL ou MongoDB.
+ * Fournit des services pour gérer les opérations de facturation (Customer) en utilisant les repositories MySQL ou MongoDB.
  *
  * @package DBConnector\Services
  */
-class Contract extends Service
+class Customer extends Service
 {
     /**
-     * ContractService constructor.
+     * CustomerService constructor.
      *
-     * Initialise le service avec l'adapter spécifié et configure le repository pour Contract.
+     * Initialise le service avec l'adapter spécifié et configure le repository pour Customer.
      *
      * @param Adapters $adapter      Le type d'adapter (MySQL ou MongoDB).
      * @param array    $authOptions  Options d'authentification pour la connexion à la base de données.
      */
     public function __construct(Adapters $adapter, array $authOptions)
     {
-        parent::__construct($adapter, Repositories::ContractRepository, $authOptions);
+        parent::__construct($adapter, Repositories::CustomerRepository, $authOptions);
     }
 
     public function getAdapter(): Adapters
@@ -49,11 +49,11 @@ class Contract extends Service
      * @param mixed       $value   La valeur à rechercher.
      * @param array|null  $options Options supplémentaires pour la requête.
      *
-     * @return MySQLContract|MongoDBContract|null Instance de Contract ou null si non trouvé.
+     * @return MySQLCustomer|MongoDBCustomer|null Instance de Customer ou null si non trouvé.
      *
      * @throws Exception Si une erreur se produit lors de la recherche.
      */
-    public function findBy(string $field, mixed $value, ?array $options = null): MySQLContract|MongoDBContract|null
+    public function findBy(string $field, mixed $value, ?array $options = null): MySQLCustomer|MongoDBCustomer|null
     {
         try {
             return $this->repository->findBy($field, $value, $options);
@@ -65,7 +65,7 @@ class Contract extends Service
     /**
      * Récupère toutes les facturations.
      *
-     * @return array Tableau d'instances de Contract.
+     * @return array Tableau d'instances de Customer.
      *
      * @throws Exception Si une erreur se produit lors de la récupération.
      */
@@ -81,7 +81,7 @@ class Contract extends Service
     /**
      * Crée une nouvelle facturation.
      *
-     * @param MySQLContract|MongoDBContract $data    Instance de Contract à créer.
+     * @param MySQLCustomer|MongoDBCustomer $data    Instance de Customer à créer.
      * @param array|null                   $options Options supplémentaires pour l'insertion.
      *
      * @return bool Vrai si l'opération réussit, faux sinon.
@@ -91,7 +91,7 @@ class Contract extends Service
     public function create(object $data, ?array $options = null): bool
     {
         // Type casting pour garantir le type attendu
-        if (!($data instanceof MySQLContract || $data instanceof MongoDBContract)) {
+        if (!($data instanceof MySQLCustomer || $data instanceof MongoDBCustomer)) {
             throw new Exception('Données de facturation invalides.');
         }
 

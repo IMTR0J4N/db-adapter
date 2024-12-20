@@ -18,6 +18,11 @@ class Billing extends Document
         $this->amount = $amount;
     }
 
+    public function setId(ObjectId $id): void
+    {
+        $this->_id = $id;
+    }
+
     public function getId(): ObjectId
     {
         return $this->_id;

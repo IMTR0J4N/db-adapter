@@ -9,7 +9,7 @@ use DBConnector\Context\Interface\MongoDBAdapterInterface;
 class MongoDBAdapter implements MongoDBAdapterInterface
 {
     private Client $MongoDBConnection;
-    private static MongoDBAdapter $adapterInstance;
+    private static MongoDBAdapter|null $adapterInstance = null;
 
     public function retrieveConnection(string $uri): Client | Exception
     {
