@@ -4,10 +4,10 @@ namespace DBAdapter\MySQL;
 
 use DBAdapter\Context\Types\Adapters;
 use DBAdapter\Context\Types\Services;
+use DBAdapter\Context\Interface\ServiceInterface;
 use DBAdapter\Services\BillingService;
 use DBAdapter\Services\ContractService;
 use DBAdapter\Services\CustomerService;
-use DBAdapter\Services\ServiceInterface;
 use DBAdapter\Services\VehicleService;
 
 use PDO;

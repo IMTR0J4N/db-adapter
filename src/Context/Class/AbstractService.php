@@ -4,9 +4,9 @@ namespace DBAdapter\Context\Class;
 
 use DBAdapter\Context\Types\Adapters;
 use DBAdapter\Context\Types\Repositories;
+use DBAdapter\Context\Interface\ServiceInterface;
 use DBAdapter\MongoDB\Repository as MongoDBRepository;
 use DBAdapter\MySQL\Repository as MySQLRepository;
-use DBAdapter\Services\ServiceInterface;
 use MongoDB\BSON\ObjectId;
 use InvalidArgumentException;
 

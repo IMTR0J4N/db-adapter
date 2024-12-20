@@ -1,6 +1,6 @@
 <?php
 
-namespace DBAdapter\Services;
+namespace DBAdapter\Context\Interface;
 
 use MongoDB\BSON\ObjectId;
 use Exception;
