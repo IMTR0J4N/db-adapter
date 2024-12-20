@@ -1,7 +1,7 @@
 <?php
 namespace DBAdapter;
 
-use DBAdapter\MongoDB\MongoDBContext;
+use DBAdapter\MongoDB\Context as MongoDBContext;
 use DBAdapter\MySQL\Context as MySQLContext;
 use DBAdapter\Context\Types\Adapters;
 use InvalidArgumentException;

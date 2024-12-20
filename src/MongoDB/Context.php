@@ -7,9 +7,10 @@ use DBAdapter\Context\Types\Services;
 use DBAdapter\Services\BillingService;
 use DBAdapter\Services\ContractService;
 use DBAdapter\Services\CustomerService;
+use DBAdapter\Services\ServiceInterface;
 use DBAdapter\Services\VehicleService;
 
-class MongoDBContext
+class Context
 {
     private $authOptions;
 
@@ -18,7 +19,7 @@ class MongoDBContext
         $this->authOptions = $authOptions;
     }
 
-    public function retrieveService(Services $service): BillingService|ContractService|CustomerService|VehicleService
+    public function retrieveService(Services $service): ServiceInterface
     {
         return match ($service) {
             Services::BillingService => new BillingService(Adapters::MongoDB, $this->authOptions),
