@@ -1,7 +1,7 @@
 {
     "name": "tr0j4n.bat/db-adapter",
     "type": "library",
-    "version": "1.0",
+    "version": "1.0.1",
     "require": {
         "mongodb/mongodb": "^1.20",
         "ext-mongodb": "*",
@@ -12,12 +12,12 @@
     },
     "autoload": {
         "psr-4": {
-            "DBConnector\\": "src/"
+            "DBAdapter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DBConnector\\Tests\\": "tests/"
+            "DBAdapter\\Tests\\": "tests/"
         }
     },
     "authors": [

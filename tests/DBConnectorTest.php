@@ -1,12 +1,12 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use DBConnector\DBConnector;
-use DBConnector\Context\Types\Adapters;
-use DBConnector\MySQL\MySQLContext;
-use DBConnector\MongoDB\MongoDBContext;
+use DBAdapter\DBAdapter;
+use DBAdapter\Context\Types\Adapters;
+use DBAdapter\MySQL\MySQLContext;
+use DBAdapter\MongoDB\MongoDBContext;
 
-class DBConnectorTest extends TestCase
+class DBAdapterTest extends TestCase
 {
     /**
      * Test la création réussie d'un MySQLContext avec les options d'authentification correctes.
@@ -21,7 +21,7 @@ class DBConnectorTest extends TestCase
             'database' => 'dbadapter',
         ];
 
-        $context = DBConnector::useAdapter(Adapters::MySQL, $authOptions);
+        $context = DBAdapter::useAdapter(Adapters::MySQL, $authOptions);
 
         $this->assertInstanceOf(MySQLContext::class, $context);
     }
@@ -42,7 +42,7 @@ class DBConnectorTest extends TestCase
             'database' => 'dbadapter',
         ];
 
-        DBConnector::useAdapter(Adapters::MySQL, $authOptions);
+        DBAdapter::useAdapter(Adapters::MySQL, $authOptions);
     }
 
     /**
@@ -55,7 +55,7 @@ class DBConnectorTest extends TestCase
             'database' => 'dbadapter',
         ];
 
-        $context = DBConnector::useAdapter(Adapters::MongoDB, $authOptions);
+        $context = DBAdapter::useAdapter(Adapters::MongoDB, $authOptions);
 
         $this->assertInstanceOf(MongoDBContext::class, $context);
     }
@@ -73,7 +73,7 @@ class DBConnectorTest extends TestCase
             'database' => 'dbadapter',
         ];
 
-        DBConnector::useAdapter(Adapters::MongoDB, $authOptions);
+        DBAdapter::useAdapter(Adapters::MongoDB, $authOptions);
     }
 
     /**
@@ -85,7 +85,7 @@ class DBConnectorTest extends TestCase
         $this->expectExceptionMessage("Unsupported adapter type");
 
         // Utilisation de l'adaptateur non supporté Adapters::UNKNOWN_TEST
-        DBConnector::useAdapter(Adapters::UNKNOWN_TEST, []);
+        DBAdapter::useAdapter(Adapters::UNKNOWN_TEST, []);
     }
 
     /**
@@ -101,7 +101,7 @@ class DBConnectorTest extends TestCase
             // 'database' => 'test_db', // Manquant
         ];
 
-        DBConnector::useAdapter(Adapters::MongoDB, $authOptions);
+        DBAdapter::useAdapter(Adapters::MongoDB, $authOptions);
     }
 
     /**
@@ -120,6 +120,6 @@ class DBConnectorTest extends TestCase
             //'database' => 'dbadapter',
         ];
 
-        DBConnector::useAdapter(Adapters::MySQL, $authOptions);
+        DBAdapter::useAdapter(Adapters::MySQL, $authOptions);
     }
 }

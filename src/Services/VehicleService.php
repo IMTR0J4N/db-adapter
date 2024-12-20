@@ -1,35 +1,35 @@
 <?php
 
-namespace DBConnector\Services;
+namespace DBAdapter\Services;
 
-use DBConnector\Context\Class\Service;
-use DBConnector\Context\Types\Adapters;
-use DBConnector\Context\Types\Repositories;
-use DBConnector\MySQL\Entity\Customer as MySQLCustomer;
-use DBConnector\MongoDB\Document\Customer as MongoDBCustomer;
+use DBAdapter\Context\Class\AbstractService;
+use DBAdapter\Context\Types\Adapters;
+use DBAdapter\Context\Types\Repositories;
+use DBAdapter\MySQL\Entity\VehicleEntity as MySQLVehicle;
+use DBAdapter\MongoDB\Document\VehicleDocument as MongoDBVehicle;
 use MongoDB\BSON\ObjectId;
 use Exception;
 
 /**
- * Classe CustomerService
+ * Classe VehicleService
  *
- * Fournit des services pour gérer les opérations de facturation (Customer) en utilisant les repositories MySQL ou MongoDB.
+ * Fournit des services pour gérer les opérations de facturation (Vehicle) en utilisant les repositories MySQL ou MongoDB.
  *
- * @package DBConnector\Services
+ * @package DBAdapter\Services
  */
-class Customer extends Service
+class VehicleService extends AbstractService
 {
     /**
-     * CustomerService constructor.
+     * VehicleService constructor.
      *
-     * Initialise le service avec l'adapter spécifié et configure le repository pour Customer.
+     * Initialise le service avec l'adapter spécifié et configure le repository pour Vehicle.
      *
      * @param Adapters $adapter      Le type d'adapter (MySQL ou MongoDB).
      * @param array    $authOptions  Options d'authentification pour la connexion à la base de données.
      */
     public function __construct(Adapters $adapter, array $authOptions)
     {
-        parent::__construct($adapter, Repositories::CustomerRepository, $authOptions);
+        parent::__construct($adapter, Repositories::VehicleRepository, $authOptions);
     }
 
     public function getAdapter(): Adapters
@@ -49,11 +49,11 @@ class Customer extends Service
      * @param mixed       $value   La valeur à rechercher.
      * @param array|null  $options Options supplémentaires pour la requête.
      *
-     * @return MySQLCustomer|MongoDBCustomer|null Instance de Customer ou null si non trouvé.
+     * @return MySQLVehicle|MongoDBVehicle|null Instance de Vehicle ou null si non trouvé.
      *
      * @throws Exception Si une erreur se produit lors de la recherche.
      */
-    public function findBy(string $field, mixed $value, ?array $options = null): MySQLCustomer|MongoDBCustomer|null
+    public function findBy(string $field, mixed $value, ?array $options = null): MySQLVehicle|MongoDBVehicle|null
     {
         try {
             return $this->repository->findBy($field, $value, $options);
@@ -65,7 +65,7 @@ class Customer extends Service
     /**
      * Récupère toutes les facturations.
      *
-     * @return array Tableau d'instances de Customer.
+     * @return array Tableau d'instances de Vehicle.
      *
      * @throws Exception Si une erreur se produit lors de la récupération.
      */
@@ -81,7 +81,7 @@ class Customer extends Service
     /**
      * Crée une nouvelle facturation.
      *
-     * @param MySQLCustomer|MongoDBCustomer $data    Instance de Customer à créer.
+     * @param MySQLVehicle|MongoDBVehicle $data    Instance de Vehicle à créer.
      * @param array|null                   $options Options supplémentaires pour l'insertion.
      *
      * @return bool Vrai si l'opération réussit, faux sinon.
@@ -91,7 +91,7 @@ class Customer extends Service
     public function create(object $data, ?array $options = null): bool
     {
         // Type casting pour garantir le type attendu
-        if (!($data instanceof MySQLCustomer || $data instanceof MongoDBCustomer)) {
+        if (!($data instanceof MySQLVehicle || $data instanceof MongoDBVehicle)) {
             throw new Exception('Données de facturation invalides.');
         }
 

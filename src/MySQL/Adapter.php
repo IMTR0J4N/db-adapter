@@ -1,15 +1,15 @@
 <?php
 
-namespace DBConnector\MySQL\Adapter;
+namespace DBAdapter\MySQL;
 
 use Exception;
 use PDO;
-use DBConnector\Context\Interface\MySQLAdapterInterface;
+use DBAdapter\Context\Interface\MySQLAdapterInterface;
 
-class MySQLAdapter implements MySQLAdapterInterface
+class Adapter implements MySQLAdapterInterface
 {
     private PDO $MySQLConnection;
-    private static MySQLAdapter|null $adapterInstance = null;
+    private static self|null $adapterInstance = null;
 
     public function retrieveConnection(string $host, string $port, string $db, string $username, string $password): PDO | Exception
     {
@@ -24,7 +24,7 @@ class MySQLAdapter implements MySQLAdapterInterface
         }
     }
 
-    public static function getAdapter(): MySQLAdapter
+    public static function getAdapter(): self
     {
         if (self::$adapterInstance === null) {
             self::$adapterInstance = new self();

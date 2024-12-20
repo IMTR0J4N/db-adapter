@@ -1,12 +1,12 @@
 <?php
 
-namespace DBConnector\MongoDB\Document;
+namespace DBAdapter\MongoDB\Document;
 
-use DBConnector\Context\Class\Document;
+use DBAdapter\Context\Class\AbstractDocument;
 use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\UTCDateTime;
 
-class Contract extends Document
+class ContractDocument extends AbstractDocument
 {
     private ObjectId $_id;
     private ObjectId $vehicle_id;

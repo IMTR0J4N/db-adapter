@@ -1,10 +1,13 @@
 <?php
 
-namespace DBConnector\MySQL\Entity;
+namespace DBAdapter\MongoDB\Document;
 
-class Vehicle
+use DBAdapter\Context\Class\AbstractDocument;
+use MongoDB\BSON\ObjectId;
+
+class VehicleDocument extends AbstractDocument
 {
-    private string $_id;
+    private ObjectId $_id;
     private string $model;
     private string $brand;
     private string $license_plate;
@@ -13,7 +16,7 @@ class Vehicle
 
     public function __construct(string $model, string $brand, string $license_plate, string $informations, int $kilometers)
     {
-        $this->_id = uniqid();
+        $this->_id = new ObjectId();
         $this->model = $model;
         $this->brand = $brand;
         $this->license_plate = $license_plate;
@@ -21,12 +24,12 @@ class Vehicle
         $this->kilometers = $kilometers;
     }
 
-    public function getId(): string
+    public function getId(): ObjectId
     {
         return $this->_id;
     }
 
-    public function setId(string $id): void
+    public function setId(ObjectId $id): void
     {
         $this->_id = $id;
     }
@@ -79,5 +82,27 @@ class Vehicle
     public function setKilometers(int $kilometers): void
     {
         $this->kilometers = $kilometers;
+    }
+
+    public function bsonSerialize(): array
+    {
+        return [
+            '_id' => $this->getId(),
+            'model' => $this->getModel(),
+            'brand' => $this->getBrand(),
+            'license_plate' => $this->getLicensePlate(),
+            'informations' => $this->getInformations(),
+            'kilometers' => $this->getKilometers(),
+        ];
+    }
+
+    public function bsonUnserialize($data): void
+    {
+        $this->setId($data['_id']);
+        $this->setModel($data['model']);
+        $this->setBrand($data['brand']);
+        $this->setLicensePlate($data['license_plate']);
+        $this->setInformations($data['informations']);
+        $this->setKilometers($data['kilometers']);
     }
 }

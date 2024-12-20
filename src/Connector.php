@@ -1,13 +1,12 @@
 <?php
-namespace DBConnector;
+namespace DBAdapter;
 
-use DBConnector\Context\Types\Services;
-use DBConnector\MongoDB\MongoDBContext;
-use DBConnector\MySQL\MySQLContext;
-use DBConnector\Context\Types\Adapters;
+use DBAdapter\MongoDB\MongoDBContext;
+use DBAdapter\MySQL\Context as MySQLContext;
+use DBAdapter\Context\Types\Adapters;
 use InvalidArgumentException;
 
-class DBConnector
+class Connector
 {
     static function useAdapter(Adapters $adapter, array $authOptions): MongoDBContext|MySQLContext
     {
@@ -30,5 +29,3 @@ class DBConnector
         }
     }
 }
-
-DBConnector::useAdapter(Adapters::MongoDB, $authOptions)->retrieveService(Services::ContractService);

@@ -1,18 +1,18 @@
 <?php
 
-namespace DBConnector\MySQL;
+namespace DBAdapter\MySQL;
 
-use DBConnector\Context\Types\Adapters;
-use DBConnector\Context\Types\Services;
-use DBConnector\Services\Billing;
-use DBConnector\Services\Contract;
-use DBConnector\Services\Customer;
-use DBConnector\Services\Vehicle;
+use DBAdapter\Context\Types\Adapters;
+use DBAdapter\Context\Types\Services;
+use DBAdapter\Services\BillingService;
+use DBAdapter\Services\ContractService;
+use DBAdapter\Services\CustomerService;
+use DBAdapter\Services\VehicleService;
 
 use PDO;
 use PDOException;
 
-class MySQLContext
+class Context
 {
     private $authOptions;
 
@@ -38,13 +38,13 @@ class MySQLContext
             print(''. $e->getMessage());
         }
     }
-    public function retrieveService(Services $service): Billing|Contract|Customer|Vehicle
+    public function retrieveService(Services $service): BillingService|ContractService|CustomerService|VehicleService
     {
         return match ($service) {
-            Services::BillingService => new Billing(Adapters::MySQL, $this->authOptions),
-            Services::ContractService => new Contract(Adapters::MySQL, $this->authOptions),
-            Services::CustomerService => new Customer(Adapters::MySQL, $this->authOptions),
-            Services::VehicleService => new Vehicle(Adapters::MySQL, $this->authOptions),
+            Services::BillingService => new BillingService(Adapters::MySQL, $this->authOptions),
+            Services::ContractService => new ContractService(Adapters::MySQL, $this->authOptions),
+            Services::CustomerService => new CustomerService(Adapters::MySQL, $this->authOptions),
+            Services::VehicleService => new VehicleService(Adapters::MySQL, $this->authOptions),
             default => throw new \InvalidArgumentException("Service not found"),
         };
     }

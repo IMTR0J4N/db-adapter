@@ -1,13 +1,15 @@
 <?php
 
-namespace DBConnector\MySQL;
+namespace DBAdapter\MySQL;
 
-use DBConnector\Context\Types\Repositories;
-use DBConnector\MySQL\Adapter\MySQLAdapter;
-use DBConnector\MySQL\Entity\Billing;
-use DBConnector\MySQL\Entity\Contract;
-use DBConnector\MySQL\Entity\Customer;
-use DBConnector\MySQL\Entity\Vehicle;
+use DBAdapter\Context\Types\Repositories;
+
+use DBAdapter\MySQL\Adapter;
+use DBAdapter\MySQL\Entity\BillingEntity;
+use DBAdapter\MySQL\Entity\ContractEntity;
+use DBAdapter\MySQL\Entity\CustomerEntity;
+use DBAdapter\MySQL\Entity\VehicleEntity;
+
 use PDO;
 use PDOException;
 
@@ -17,7 +19,7 @@ use PDOException;
  * Fournit des méthodes génériques pour interagir avec une base de données MySQL.
  * Permet de réaliser des opérations CRUD (Create, Read, Update, Delete) sur différentes entités.
  *
- * @package DBConnector\MySQL
+ * @package DBAdapter\MySQL
  */
 class Repository
 {
@@ -56,7 +58,7 @@ class Repository
         $this->repository = $repository;
 
         // Connexion via MySQLAdapter
-        $this->pdo = MySQLAdapter::getAdapter()->retrieveConnection(
+        $this->pdo = Adapter::getAdapter()->retrieveConnection(
             $authOptions['host'],
             $authOptions['port'],
             $authOptions['database'],
@@ -66,10 +68,10 @@ class Repository
 
         // Mapping du repository vers une classe spécifique
         $this->entityClass = match ($repository) {
-            Repositories::BillingRepository => Billing::class,
-            Repositories::ContractRepository => Contract::class,
-            Repositories::CustomerRepository => Customer::class,
-            Repositories::VehicleRepository => Vehicle::class,
+            Repositories::BillingRepository => BillingEntity::class,
+            Repositories::ContractRepository => ContractEntity::class,
+            Repositories::CustomerRepository => CustomerEntity::class,
+            Repositories::VehicleRepository => VehicleEntity::class,
             default => throw new \InvalidArgumentException("Repository non pris en charge"),
         };
     }
@@ -111,12 +113,12 @@ class Repository
     /**
      * Crée un nouvel enregistrement dans la table associée.
      *
-     * @param Billing|Contract|Customer|Vehicle $data Instance de l'entité à insérer.
+     * @param BillingEntity|ContractEntity|CustomerEntity|VehicleEntity $data Instance de l'entité à insérer.
      * @param array|null $options Options supplémentaires pour l'insertion.
      *
      * @return bool Vrai si l'opération réussit, faux sinon.
      */
-    public function create(Billing|Contract|Customer|Vehicle $data, ?array $options = null): bool
+    public function create(BillingEntity|ContractEntity|CustomerEntity|VehicleEntity $data, ?array $options = null): bool
     {
         try {
             $table = $this->repository->value;

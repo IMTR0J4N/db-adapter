@@ -1,15 +1,15 @@
 <?php
 
-namespace DBConnector\MongoDB\Adapter;
+namespace DBAdapter\MongoDB;
 
 use Exception;
 use MongoDB\Client;
-use DBConnector\Context\Interface\MongoDBAdapterInterface;
+use DBAdapter\Context\Interface\MongoDBAdapterInterface;
 
-class MongoDBAdapter implements MongoDBAdapterInterface
+class Adapter implements MongoDBAdapterInterface
 {
     private Client $MongoDBConnection;
-    private static MongoDBAdapter|null $adapterInstance = null;
+    private static self|null $adapterInstance = null;
 
     public function retrieveConnection(string $uri): Client | Exception
     {
@@ -23,7 +23,7 @@ class MongoDBAdapter implements MongoDBAdapterInterface
         }
     }
 
-    public static function getAdapter(): MongoDBAdapter
+    public static function getAdapter(): self
     {
         if (self::$adapterInstance === null) {
             self::$adapterInstance = new self();

@@ -1,6 +1,6 @@
 <?php
 
-namespace DBConnector\Context\Interface;
+namespace DBAdapter\Context\Interface;
 
 interface MongoDBAdapterInterface
 {

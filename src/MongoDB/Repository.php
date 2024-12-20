@@ -1,13 +1,13 @@
 <?php
 
-namespace DBConnector\MongoDB;
+namespace DBAdapter\MongoDB;
 
-use DBConnector\Context\Types\Repositories;
-use DBConnector\MongoDB\Adapter\MongoDBAdapter;
-use DBConnector\MongoDB\Document\Billing;
-use DBConnector\MongoDB\Document\Contract;
-use DBConnector\MongoDB\Document\Customer;
-use DBConnector\MongoDB\Document\Vehicle;
+use DBAdapter\Context\Types\Repositories;
+use DBAdapter\MongoDB\Adapter as MongoDBAdapter;
+use DBAdapter\MongoDB\Document\BillingDocument;
+use DBAdapter\MongoDB\Document\ContractDocument;
+use DBAdapter\MongoDB\Document\CustomerDocument;
+use DBAdapter\MongoDB\Document\VehicleDocument;
 use MongoDB\BSON\ObjectId;
 use MongoDB\Database;
 
@@ -26,10 +26,10 @@ class Repository
 
         // Mapping du repository vers une classe spécifique
         $this->entityClass = match ($repository) {
-            Repositories::BillingRepository => Billing::class,
-            Repositories::ContractRepository => Contract::class,
-            Repositories::CustomerRepository => Customer::class,
-            Repositories::VehicleRepository => Vehicle::class,
+            Repositories::BillingRepository => BillingDocument::class,
+            Repositories::ContractRepository => ContractDocument::class,
+            Repositories::CustomerRepository => CustomerDocument::class,
+            Repositories::VehicleRepository => VehicleDocument::class,
             default => throw new \InvalidArgumentException("Repository non pris en charge"),
         };
     }
@@ -80,11 +80,11 @@ class Repository
     /**
      * Crée un nouveau document dans la collection.
      *
-     * @param Billing|Contract|Customer|Vehicle $data Instance de la classe correspondante.
+     * @param BillingDocument|ContractDocument|CustomerDocument|VehicleDocument $data Instance de la classe correspondante.
      * @param array|null $options Options supplémentaires.
      * @return bool Succès de l'opération.
      */
-    public function create(Billing|Contract|Customer|Vehicle $data, ?array $options = null): bool
+    public function create(BillingDocument|ContractDocument|CustomerDocument|VehicleDocument $data, ?array $options = null): bool
     {
         try {
             $collection = $this->database->selectCollection($this->repository->value);

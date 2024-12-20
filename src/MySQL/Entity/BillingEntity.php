@@ -1,8 +1,8 @@
 <?php
 
-namespace DBConnector\MySQL\Entity;
+namespace DBAdapter\MySQL\Entity;
 
-class Billing
+class BillingEntity
 {
     private string $_id;
     private string $contract_id;

@@ -1,11 +1,11 @@
 <?php
 
-namespace DBConnector\MongoDB\Document;
+namespace DBAdapter\MongoDB\Document;
 
-use DBConnector\Context\Class\Document;
+use DBAdapter\Context\Class\AbstractDocument;
 use MongoDB\BSON\ObjectId;
 
-class Customer extends Document
+class CustomerDocument extends AbstractDocument
 {
     private ObjectId $id;
     private string $firstname;

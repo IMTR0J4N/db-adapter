@@ -1,11 +1,11 @@
 <?php
 
-namespace DBConnector\Context\Class;
+namespace DBAdapter\Context\Class;
 
-use DBConnector\Context\Types\Adapters;
-use DBConnector\Context\Types\Repositories;
-use DBConnector\MongoDB\Repository as MongoDBRepository;
-use DBConnector\MySQL\Repository as MySQLRepository;
+use DBAdapter\Context\Types\Adapters;
+use DBAdapter\Context\Types\Repositories;
+use DBAdapter\MongoDB\Repository as MongoDBRepository;
+use DBAdapter\MySQL\Repository as MySQLRepository;
 use MongoDB\BSON\ObjectId;
 use MongoDB\Model\BSONDocument;
 use Exception;
@@ -15,9 +15,9 @@ use Exception;
  *
  * Fournit une base pour les services qui interagissent avec les repositories MySQL et MongoDB.
  *
- * @package DBConnector\Context\Class
+ * @package DBAdapter\Context\Class
  */
-abstract class Service
+abstract class AbstractService
 {
     /**
      * @var Adapters Le type d'adapter utilisé (MySQL ou MongoDB).

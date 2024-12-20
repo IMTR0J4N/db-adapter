@@ -1,8 +1,8 @@
 <?php
 
-namespace DBConnector\MySQL\Entity;
+namespace DBAdapter\MySQL\Entity;
 
-class Customer
+class CustomerEntity
 {
     private string $id;
     private string $firstname;

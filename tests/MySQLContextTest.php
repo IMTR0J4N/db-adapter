@@ -1,13 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use DBConnector\MySQL\MySQLContext;
-use DBConnector\Context\Types\Adapters;
-use DBConnector\Context\Types\Services;
-use DBConnector\Services\Billing;
-use DBConnector\Services\Contract;
-use DBConnector\Services\Customer;
-use DBConnector\Services\Vehicle;
+use DBAdapter\MySQL\MySQLContext;
+use DBAdapter\Context\Types\Adapters;
+use DBAdapter\Context\Types\Services;
+use DBAdapter\Services\Billing;
+use DBAdapter\Services\Contract;
+use DBAdapter\Services\Customer;
+use DBAdapter\Services\Vehicle;
 use InvalidArgumentException;
 
 class MySQLContextTest extends TestCase
@@ -150,11 +150,11 @@ class MySQLContextTest extends TestCase
 
         // Exemple : Ajouter Services::UNKNOWN_SERVICE dans l'énumération
         // et l'utiliser ici
-        // DBConnector\Services\UnknownService = 'unknown_service';
+        // DBAdapter\Services\UnknownService = 'unknown_service';
 
         // Pour cet exemple, supposons que l'énumération a une valeur UNKNOWN_SERVICE
         // Sinon, nous allons marquer le test comme manqué
-        if (defined('DBConnector\Context\Types\Services::UNKNOWN_TEST')) {
+        if (defined('DBAdapter\Context\Types\Services::UNKNOWN_TEST')) {
             $service = Services::UNKNOWN_TEST;
             $context->retrieveService($service);
         } else {

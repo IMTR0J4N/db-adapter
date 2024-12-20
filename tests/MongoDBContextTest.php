@@ -1,13 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use DBConnector\MongoDB\MongoDBContext;
-use DBConnector\Context\Types\Adapters;
-use DBConnector\Context\Types\Services;
-use DBConnector\Services\Billing;
-use DBConnector\Services\Contract;
-use DBConnector\Services\Customer;
-use DBConnector\Services\Vehicle;
+use DBAdapter\MongoDB\MongoDBContext;
+use DBAdapter\Context\Types\Adapters;
+use DBAdapter\Context\Types\Services;
+use DBAdapter\Services\Billing;
+use DBAdapter\Services\Contract;
+use DBAdapter\Services\Customer;
+use DBAdapter\Services\Vehicle;
 use InvalidArgumentException;
 
 class MongoDBContextTest extends TestCase

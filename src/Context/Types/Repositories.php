@@ -1,6 +1,6 @@
 <?php 
 
-namespace DBConnector\Context\Types;
+namespace DBAdapter\Context\Types;
 
 enum Repositories: string
 {

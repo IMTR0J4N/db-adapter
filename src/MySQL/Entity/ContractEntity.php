@@ -1,10 +1,10 @@
 <?php
 
-namespace DBConnector\MySQL\Entity;
+namespace DBAdapter\MySQL\Entity;
 
 use DateTime;
 
-class Contract
+class ContractEntity
 {
     private string $_id;
     private string $vehicle_id;
