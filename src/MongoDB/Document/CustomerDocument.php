@@ -18,12 +18,12 @@ class CustomerDocument extends AbstractDocument
     public function __construct(string $firstname, string $lastname, string $address, string $email, string $password, string $driverLicenseNumber)
     {
         $this->id = new ObjectId();
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->address = $address;
-        $this->email = $email;
-        $this->password = $password;
-        $this->driverLicenseNumber = $driverLicenseNumber;
+        $this->setFirstname($firstname);
+        $this->setLastname($lastname);
+        $this->setAddress($address);
+        $this->setEmail($email);
+        $this->setPassword($password);
+        $this->setDriverLicenseNumber($driverLicenseNumber);
     }
 
     public function getId(): ObjectId
@@ -83,7 +83,9 @@ class CustomerDocument extends AbstractDocument
 
     public function setPassword(string $password): void
     {
-        $this->password = $password;
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        $this->password = $hashedPassword;
     }
 
     public function getDriverLicenseNumber(): string
